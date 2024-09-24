@@ -1,3 +1,5 @@
+import "../scss/main.scss"; // Import the SCSS file for Webpack to bundle
+
 const swiper = new Swiper(".swiper-container", {
   slidesPerView: 1,
   centeredSlides: true,

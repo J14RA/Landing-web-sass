@@ -49,7 +49,7 @@
   color: #cbb7ff;
 }
 .main-header .main-nav .main-nav__item--cta {
-  background-color: #cbb7ff;
+  background-color: #ab8bff;
   color: #fff;
   padding: 0.5rem 1rem;
   border-radius: 4px;
@@ -57,7 +57,7 @@
   border: none;
 }
 .main-header .main-nav .main-nav__item--cta:hover {
-  background-color: #a684ff;
+  background-color: #ab8bff;
 }
 .main-header .main-nav .main-nav__item--cta:disabled {
   background-color: white;
@@ -83,7 +83,7 @@ main #product-overview p {
   margin-bottom: 2.5rem;
 }
 main #product-overview .product-overview__item--cta {
-  background-color: #cbb7ff;
+  background-color: #ab8bff;
   color: #fff;
   padding: 0.5rem 1rem;
   border-radius: 4px;
@@ -91,7 +91,7 @@ main #product-overview .product-overview__item--cta {
   border: none;
 }
 main #product-overview .product-overview__item--cta:hover {
-  background-color: #a684ff;
+  background-color: #ab8bff;
 }
 main #product-overview .product-overview__item--cta:disabled {
   background-color: white;
