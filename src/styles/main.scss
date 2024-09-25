@@ -1,0 +1,284 @@
+@use "sass:color";
+
+// Color variables
+$base-color: #cbb7ff;
+$light-bg: #f8f9fa;
+$text-color: #333;
+$dark-bg: #343a40;
+$white: #fff;
+$grey: #666;
+
+// Flexbox Mixin
+@mixin flexbox($justify: normal,
+    $align: stretch,
+    $direction: row,
+    $wrap: nowrap) {
+    display: flex;
+    justify-content: $justify;
+    align-items: $align;
+    flex-direction: $direction;
+    flex-wrap: $wrap;
+}
+
+// Button mixin
+@mixin button($background-color, $color) {
+    background-color: color.scale($background-color, $lightness: -10%);
+    color: $color;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    border: none;
+
+    &:hover {
+        background-color: color.scale($background-color, $lightness: -10%);
+    }
+
+    &:disabled {
+        background-color: color.adjust($background-color, $lightness: 20%);
+        cursor: not-allowed;
+    }
+}
+
+// Button mixins with color scaling and darkening
+@mixin primary-button($background-color, $color) {
+    @include button($background-color, $color);
+    // Add a more prominent border and a slightly different background color
+    border: 2px solid color.scale($background-color, $lightness: -10%);
+}
+
+@mixin secondary-button($background-color, $color) {
+    @include button($background-color, $color);
+    // Use a lighter background color and a thinner border
+    background-color: lighten($background-color, 10%);
+    border: 1px solid $grey;
+}
+
+@mixin cta-button($background-color, $color) {
+    @include button($background-color, $color);
+    // Add a larger font size and a more prominent shadow
+    font-size: 1.25rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+// Clearfix Mixin
+@mixin clearfix {
+    &::after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+}
+
+
+// Section Styling
+section {
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background-color: $light-bg;
+    border-radius: 8px;
+    @include clearfix;
+
+    &.highlight {
+        background-color: color.scale($base-color, $lightness: 20%);
+    }
+}
+
+// Main header and navigation
+.main-header {
+    background-color: $light-bg;
+    padding: 1rem 2rem;
+
+    .main-nav {
+        @include flexbox(space-between, center);
+
+        &__logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            align-items: center;
+
+            img {
+                max-width: 50px;
+                margin-right: 10px;
+                transition: transform 0.3s ease;
+
+                &:hover {
+                    transform: scale(1.1);
+                }
+            }
+
+            &:hover {
+                color: $base-color;
+            }
+        }
+
+        &__items {
+            @include flexbox();
+            list-style: none;
+            margin: 0;
+            padding: 0;
+
+            .main-nav__item {
+                margin-right: 2rem;
+
+                a {
+                    text-decoration: none;
+                    color: $text-color;
+
+                    &:hover {
+                        color: $base-color;
+                    }
+                }
+            }
+        }
+
+        .main-nav__item--cta {
+            @include primary-button($base-color, $white);
+        }
+    }
+}
+
+// Main content
+main {
+    padding: 0 2rem;
+
+    // Product Overview Section
+    #product-overview {
+        text-align: center;
+        padding: 5rem 2rem;
+        background-image: radial-gradient($white 80%, $base-color 20%);
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 2.5rem;
+        }
+
+        p {
+            padding: 0 1rem;
+            font-size: 1.25rem;
+            color: $grey;
+            margin-bottom: 2.5rem;
+        }
+
+        .product-overview__item--cta {
+            @include cta-button($base-color, $white);
+        }
+    }
+}
+
+// Plans Section with Swiper integration
+#plans {
+    padding: 2rem 0;
+
+    .plan {
+        @include flexbox(center, center, column);
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        padding: 1.5rem;
+        text-align: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        height: 100%;
+
+        img {
+            max-width: 100%;
+            border-radius: 8px;
+        }
+
+        .plan__title {
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            color: #666;
+            font-size: 1rem;
+        }
+    }
+
+    .swiper-pagination {
+        text-align: center;
+        margin-top: 1rem;
+    }
+
+    .swiper-button-prev,
+    .swiper-button-next {
+        color: #333;
+    }
+}
+
+
+// Footer Section (unchanged)
+.footer {
+    background-color: $dark-bg;
+    padding: 2rem 0;
+    color: $white;
+
+    .footer-row {
+        @include flexbox(space-between);
+
+        .footer-col {
+            flex-basis: 22%;
+
+            h4 {
+                font-size: 1.5rem;
+                margin-bottom: 1rem;
+            }
+
+            .links {
+                list-style: none;
+                padding: 0;
+
+                li {
+                    margin-bottom: 0.5rem;
+
+                    a {
+                        color: #adb5bd;
+                        text-decoration: none;
+
+                        &:hover {
+                            color: $white;
+                        }
+                    }
+                }
+            }
+
+            .icons {
+                margin-top: 1rem;
+
+                i {
+                    margin-right: 1rem;
+                    font-size: 1.25rem;
+                    color: #adb5bd;
+
+                    &:hover {
+                        color: $white;
+                    }
+                }
+            }
+
+            form {
+                margin-top: 1rem;
+
+                input {
+                    padding: 0.5rem;
+                    border: none;
+                    border-radius: 4px;
+                    margin-right: 0.5rem;
+                }
+
+                button {
+                    padding: 0.5rem 1rem;
+                    background-color: $base-color;
+                    color: $white;
+
+                    &:hover {
+                        background-color: color.adjust($base-color, $lightness: -10%);
+                    }
+                }
+            }
+        }
+    }
+}

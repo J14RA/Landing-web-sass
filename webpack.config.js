@@ -1,51 +1,51 @@
 const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
-  mode: "development", // Use 'production' when ready for production build
-  entry: "./src/js/main.js", // Main entry point for JS
+  entry: "./src/index.js",
   output: {
-    filename: "bundle.[contenthash].js", // Output JS bundle with cache busting
-    path: path.resolve(__dirname, "dist"), // Output folder for Webpack
+    filename: "bundle.js",
+    path: path.resolve(__dirname, "dist"),
+    clean: true, // Cleans the output directory before every build (optional)
   },
   module: {
     rules: [
       {
-        test: /\.html$/,
-        use: ["html-loader"], // Loads HTML files and injects into JS bundle
+        test: /\.scss$/, // For Sass/SCSS files
+        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
       },
       {
-        test: /\.scss$/, // SCSS files
+        test: /\.css$/, // For CSS files
+        use: [MiniCssExtractPlugin.loader, "css-loader"],
+      },
+      {
+        test: /\.(png|jpg|gif|svg)$/, // For image assets
         use: [
-          MiniCssExtractPlugin.loader, // Extract CSS into separate file
-          "css-loader", // Turns CSS into CommonJS
-          "sass-loader", // Compiles SCSS into CSS
+          {
+            loader: "file-loader",
+            options: {
+              name: "[name].[ext]",
+              outputPath: "images/",
+            },
+          },
         ],
-      },
-      {
-        test: /\.(png|jpg|jpeg|gif|svg)$/i, // Handle image files
-        type: "asset/resource",
       },
     ],
   },
   plugins: [
-    new CleanWebpackPlugin(), // Cleans the /dist folder before each build
-    new HtmlWebpackPlugin({
-      template: "./src/index.html", // Base HTML file
-    }),
     new MiniCssExtractPlugin({
-      filename: "styles.[contenthash].css", // Output CSS with cache busting
+      filename: "main.css", // Output CSS file
     }),
   ],
-  devtool: "source-map", // Enable source maps for debugging
+  // Corrected devServer configuration
   devServer: {
     static: {
-      directory: path.join(__dirname, "dist"), // Update from 'contentBase' to 'static'
+      directory: path.join(__dirname, "dist"), // Serve files from 'dist' directory
     },
-    compress: true, // Enable gzip compression for better performance
-    port: 9000, // Port to run the dev server
-    open: true, // Automatically opens the browser
+    compress: true, // Enable gzip compression
+    port: 9000, // Use port 9000
+    hot: true, // Enable Hot Module Replacement
+    open: true, // Automatically open the browser on start
   },
+  mode: "development",
 };
