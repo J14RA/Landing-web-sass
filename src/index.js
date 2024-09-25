@@ -1,15 +1,14 @@
-// src/index.js
-import Swiper from "swiper"; // No need to import Navigation and Pagination separately
+import Swiper from "swiper";
 import "swiper/swiper-bundle.css";
 import "./styles/main.scss";
 
-// Initialize Swiper
 document.addEventListener("DOMContentLoaded", () => {
-  const swiper = new Swiper(".swiper-container", {
+  const swiper = new Swiper(".swiper", {
+    slidesPerView: 3,
+    spaceBetween: 30,
+    centeredSlides: true,
     loop: true,
-    pagination: {
-      el: ".swiper-pagination",
-    },
+    grabCursor: true,
     navigation: {
       nextEl: ".swiper-button-next",
       prevEl: ".swiper-button-prev",

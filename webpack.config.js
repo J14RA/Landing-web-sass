@@ -1,25 +1,34 @@
 const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
+const isDevelopment = process.env.NODE_ENV === "development";
+
 module.exports = {
   entry: "./src/index.js",
   output: {
     filename: "bundle.js",
     path: path.resolve(__dirname, "dist"),
-    clean: true, // Cleans the output directory before every build (optional)
+    clean: true, // Clean output directory before each build
   },
   module: {
     rules: [
       {
-        test: /\.scss$/, // For Sass/SCSS files
-        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
+        test: /\.scss$/,
+        use: [
+          isDevelopment ? "style-loader" : MiniCssExtractPlugin.loader, // Use style-loader in development for live changes
+          "css-loader",
+          "sass-loader",
+        ],
       },
       {
-        test: /\.css$/, // For CSS files
-        use: [MiniCssExtractPlugin.loader, "css-loader"],
+        test: /\.css$/,
+        use: [
+          isDevelopment ? "style-loader" : MiniCssExtractPlugin.loader, // Inject CSS into DOM in dev mode
+          "css-loader",
+        ],
       },
       {
-        test: /\.(png|jpg|gif|svg)$/, // For image assets
+        test: /\.(png|jpg|gif|svg)$/, // Handle image files
         use: [
           {
             loader: "file-loader",
@@ -34,18 +43,17 @@ module.exports = {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: "main.css", // Output CSS file
+      filename: "main.css",
     }),
   ],
-  // Corrected devServer configuration
   devServer: {
     static: {
-      directory: path.join(__dirname, "dist"), // Serve files from 'dist' directory
+      directory: path.join(__dirname, "dist"), // Serve files from 'dist'
     },
-    compress: true, // Enable gzip compression
-    port: 9000, // Use port 9000
+    compress: true,
+    port: 9000,
     hot: true, // Enable Hot Module Replacement
-    open: true, // Automatically open the browser on start
+    open: true, // Automatically open the browser
   },
-  mode: "development",
+  mode: isDevelopment ? "development" : "production", // Set mode based on environment
 };

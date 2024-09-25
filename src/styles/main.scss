@@ -8,11 +8,8 @@ $dark-bg: #343a40;
 $white: #fff;
 $grey: #666;
 
-// Flexbox Mixin
-@mixin flexbox($justify: normal,
-    $align: stretch,
-    $direction: row,
-    $wrap: nowrap) {
+// Flexbox Mixin with optimized defaults
+@mixin flexbox($justify: flex-start, $align: center, $direction: row, $wrap: nowrap) {
     display: flex;
     justify-content: $justify;
     align-items: $align;
@@ -20,14 +17,26 @@ $grey: #666;
     flex-wrap: $wrap;
 }
 
+// Color palette function for light/dark adjustments
+@function color-palette($color, $type) {
+    @if $type =='light' {
+        @return lighten($color, 15%);
+    }
+
+    @else if $type =='dark' {
+        @return darken($color, 15%);
+    }
+}
+
 // Button mixin
 @mixin button($background-color, $color) {
-    background-color: color.scale($background-color, $lightness: -10%);
+    background-color: $background-color;
     color: $color;
     padding: 0.5rem 1rem;
     border-radius: 4px;
     cursor: pointer;
     border: none;
+    transition: background-color 0.3s ease; // Transition for smooth hover
 
     &:hover {
         background-color: color.scale($background-color, $lightness: -10%);
@@ -39,48 +48,31 @@ $grey: #666;
     }
 }
 
-// Button mixins with color scaling and darkening
+// Primary button mixin
 @mixin primary-button($background-color, $color) {
     @include button($background-color, $color);
-    // Add a more prominent border and a slightly different background color
     border: 2px solid color.scale($background-color, $lightness: -10%);
 }
 
+// Secondary button mixin
 @mixin secondary-button($background-color, $color) {
     @include button($background-color, $color);
-    // Use a lighter background color and a thinner border
     background-color: lighten($background-color, 10%);
     border: 1px solid $grey;
 }
 
+// Call-to-action button mixin
 @mixin cta-button($background-color, $color) {
     @include button($background-color, $color);
-    // Add a larger font size and a more prominent shadow
     font-size: 1.25rem;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-// Clearfix Mixin
-@mixin clearfix {
-    &::after {
-        content: "";
-        display: table;
-        clear: both;
-    }
-}
-
-
-// Section Styling
-section {
-    margin-bottom: 2rem;
-    padding: 1rem;
-    background-color: $light-bg;
-    border-radius: 8px;
-    @include clearfix;
-
-    &.highlight {
-        background-color: color.scale($base-color, $lightness: 20%);
-    }
+// Dynamic grid layout mixin
+@mixin grid-layout($min-width: 300px, $gap: 20px) {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax($min-width, 1fr));
+    gap: $gap;
 }
 
 // Main header and navigation
@@ -170,47 +162,58 @@ main {
 
 // Plans Section with Swiper integration
 #plans {
-    padding: 2rem 0;
+    padding: 1rem;
+    margin: 1rem;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+    justify-self: center;
+}
 
-    .plan {
-        @include flexbox(center, center, column);
-        background-color: #f9f9f9;
-        border-radius: 10px;
-        padding: 1.5rem;
-        text-align: center;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+// Swiper specific styles
+.swiper {
+    width: 80%;
+}
+
+.swiper-slide {
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease, opacity 0.3s ease; // Add smooth transitions
+
+    // Ensure that images inside swiper slides are responsive
+    img {
         width: 100%;
-        height: 100%;
-
-        img {
-            max-width: 100%;
-            border-radius: 8px;
-        }
-
-        .plan__title {
-            font-size: 1.75rem;
-            margin-bottom: 1rem;
-        }
-
-        p {
-            color: #666;
-            font-size: 1rem;
-        }
+        border-radius: 10px 10px 0 0;
     }
 
-    .swiper-pagination {
-        text-align: center;
-        margin-top: 1rem;
+    &__title {
+        font-size: 24px;
+        margin: 15px 0;
     }
 
-    .swiper-button-prev,
-    .swiper-button-next {
-        color: #333;
+    p {
+        font-size: 16px;
+        color: #666;
+    }
+
+    // Apply reduced opacity to non-active slides
+    &:not(.swiper-slide-active) {
+        opacity: 0.5; // Set reduced opacity for inactive slides
+        transform: scale(0.9); // Slightly reduce the size of inactive slides
+    }
+
+    // Hover effect for the active slide
+    &.swiper-slide-active:hover {
+        transform: scale(1.05); // Grow on hover for the active slide
     }
 }
 
-
-// Footer Section (unchanged)
+// Footer Section
 .footer {
     background-color: $dark-bg;
     padding: 2rem 0;
