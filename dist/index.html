@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zephyr Landing Page</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link rel="stylesheet" href="main.css">
 </head>
 
@@ -94,15 +95,28 @@
                         </p>
                     </div>
                 </div>
-                <!-- Navigation arrows -->
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
+                <div class="plan-nav">
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-pagination"></div>
+                </div>
             </div>
         </section>
 
         <section id="partnerships">
             <p>Beloved worldwide brands love Zephyr</p>
-            <div class="partnership__list"></div>
+            <div class="partnership__list">
+                <!-- Additional required wrapper -->
+                <div class="swiper-wrapper">
+                    <!-- Slides -->
+                    <div class="swiper-slide"><img src="https://placehold.co/150x100" alt="Feature Image" /></div>
+                    <div class="swiper-slide"><img src="https://placehold.co/150x100" alt="Feature Image" /></div>
+                    <div class="swiper-slide"><img src="https://placehold.co/150x100" alt="Feature Image" /></div>
+                    <div class="swiper-slide"><img src="https://placehold.co/150x100" alt="Feature Image" /></div>
+                    <div class="swiper-slide"><img src="https://placehold.co/150x100" alt="Feature Image" /></div>
+                    <div class="swiper-slide"><img src="https://placehold.co/150x100" alt="Feature Image" /></div>
+                </div>
+            </div>
         </section>
 
         <section id="key-features">
@@ -124,74 +138,97 @@
                     <a href="#">Passed Security Audit</a>
                 </li>
             </ul>
-
-            <div class="key-features__top">
-                <article class="key-feature">
-                    <h3 class="section-sub-title">Handle Payments Accurately</h3>
-                    <p>
-                        Unravel the mystery. Gain unparalleled understanding of your
-                        performance across all payment platforms.
-                    </p>
-                    <img src="https://placehold.co/500x200" alt="Handle payments accurately" />
-                </article>
-                <article class="key-feature">
-                    <h3 class="section-sub-title">
-                        Fast-track your worldwide expansion plan
-                    </h3>
-                    <p>
-                        Activate new payment services instantly, without waiting for
-                        months.
-                    </p>
-                    <img src="https://placehold.co/500x200" alt="Fast-track your expansion plan" />
-                </article>
-                <article class="key-feature">
-                    <h3 class="section-sub-title">Fraud Prevention</h3>
-                    <p>
-                        Implement anti-fraud measures throughout your entire payment
-                        processes.
-                    </p>
-                    <img src="https://placehold.co/300x200" alt="Fraud prevention" />
-                </article>
-                <article class="key-feature">
-                    <h3 class="section-sub-title">Increase Checkout Conversions</h3>
-                    <p>
-                        Create exceptional payment experiences, customized for your
-                        clientele.
-                    </p>
-                    <img src="https://placehold.co/300x200" alt="Increase checkout conversions" />
-                </article>
-                <article class="key-feature">
-                    <h3 class="section-sub-title">Enhance Payment Efficiency</h3>
-                    <p>
-                        Exceed your KPIs using smart tools crafted to optimize payment
-                        success.
-                    </p>
-                    <img src="https://placehold.co/300x200" alt="Enhance payment efficiency" />
-                </article>
+            <div class="parent">
+                <div class="div1">
+                    <article class="key-feature">
+                        <h3 class="section-sub-title">Handle Payments Accurately</h3>
+                        <p>
+                            Unravel the mystery. Gain unparalleled understanding of your
+                            performance across all payment platforms.
+                        </p>
+                        <img src="https://placehold.co/500x200" alt="Handle payments accurately" />
+                    </article>
+                </div>
+                <div class="div2">
+                    <article class="key-feature">
+                        <h3 class="section-sub-title">
+                            Fast-track your worldwide expansion plan
+                        </h3>
+                        <p>
+                            Activate new payment services instantly, without waiting for
+                            months.
+                        </p>
+                        <img src="https://placehold.co/500x200" alt="Fast-track your expansion plan" />
+                    </article>
+                </div>
+                <div class="div3">
+                    <article class="key-feature">
+                        <h3 class="section-sub-title">Fraud Prevention</h3>
+                        <p>
+                            Implement anti-fraud measures throughout your entire payment
+                            processes.
+                        </p>
+                        <img src="https://placehold.co/300x200" alt="Fraud prevention" />
+                    </article>
+                </div>
+                <div class="div4">
+                    <article class="key-feature">
+                        <h3 class="section-sub-title">Increase Checkout Conversions</h3>
+                        <p>
+                            Create exceptional payment experiences, customized for your
+                            clientele.
+                        </p>
+                        <img src="https://placehold.co/300x200" alt="Increase checkout conversions" />
+                    </article>
+                </div>
+                <div class="div5">
+                    <article class="key-feature">
+                        <h3 class="section-sub-title">Enhance Payment Efficiency</h3>
+                        <p>
+                            Exceed your KPIs using smart tools crafted to optimize payment
+                            success.
+                        </p>
+                        <img src="https://placehold.co/300x200" alt="Enhance payment efficiency" />
+                    </article>
+                </div>
             </div>
-
             <div class="key-features__bottom">
-                <article class="key-feature">
-                    <h3 class="section-sub-title">Payments API</h3>
-                    <p>
-                        Connect seamlessly with numerous payment services through a single
-                        API, streamlining the process into one unified approach.
-                    </p>
-                </article>
-                <article class="key-feature">
-                    <h3 class="section-sub-title">Web & Mobile Checkout SDKs</h3>
-                    <p>
-                        Develop an engaging checkout experience across all your
-                        applications with dynamic features.
-                    </p>
-                </article>
-                <article class="key-feature">
-                    <h3 class="section-sub-title">Customization & Flexibility</h3>
-                    <p>
-                        Select your preferred integration method and tailor the checkout
-                        to precisely match your requirements.
-                    </p>
-                </article>
+                <h2 class="section-title">
+                    The final payments integration solution you'll ever require
+                </h2>
+                <p>
+                    We offer the foundational elements for you to construct your perfect payment stack without any
+                    limitations.
+                </p>
+                <ul class="key-features__items">
+                    <li class="key-features__item">
+                        <article class="key-feature">
+                            <h3 class="section-sub-title">Payments API</h3>
+                            <p>
+                                Connect seamlessly with numerous payment services through a single
+                                API, streamlining the process into one unified approach.
+                            </p>
+                        </article>
+                    </li>
+                    <li class="key-features__item">
+                        <article class="key-feature">
+                            <h3 class="section-sub-title">Web & Mobile Checkout SDKs</h3>
+                            <p>
+                                Develop an engaging checkout experience across all your
+                                applications with dynamic features.
+                            </p>
+                        </article>
+                    </li>
+                    <li class="key-features__item">
+                        <article class="key-feature">
+                            <h3 class="section-sub-title">Customization & Flexibility</h3>
+                            <p>
+                                Select your preferred integration method and tailor the checkout
+                                to precisely match your requirements.
+                            </p>
+                        </article>
+                    </li>
+                </ul>
                 <a href="#" class="key-features__bottom--cta">Explore Docs</a>
             </div>
         </section>
@@ -271,6 +308,7 @@
             </div>
         </section>
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="bundle.js"></script>
 </body>
 

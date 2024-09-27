@@ -1,233 +1,347 @@
-@use "sass:color";
-
-// Color variables
-$base-color: #cbb7ff;
-$light-bg: #f8f9fa;
+/* Variables */
+$primary-color: #cbb7ff;
+$secondary-color: #f8f6ff;
 $text-color: #333;
-$dark-bg: #343a40;
+$light-gray: #f4f4f4;
 $white: #fff;
-$grey: #666;
+$dark-gray: #666;
 
-// Flexbox Mixin with optimized defaults
-@mixin flexbox($justify: flex-start, $align: center, $direction: row, $wrap: nowrap) {
-    display: flex;
-    justify-content: $justify;
-    align-items: $align;
-    flex-direction: $direction;
-    flex-wrap: $wrap;
+/* Import Swiper CSS */
+@use "sass:color";
+@import 'swiper/css';
+@import 'swiper/css/navigation';
+@import 'swiper/css/pagination';
+
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-// Color palette function for light/dark adjustments
-@function color-palette($color, $type) {
-    @if $type =='light' {
-        @return lighten($color, 15%);
-    }
-
-    @else if $type =='dark' {
-        @return darken($color, 15%);
-    }
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: $text-color;
+    background-color: $light-gray;
 }
 
-// Button mixin
-@mixin button($background-color, $color) {
-    background-color: $background-color;
-    color: $color;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    cursor: pointer;
-    border: none;
-    transition: background-color 0.3s ease; // Transition for smooth hover
-
-    &:hover {
-        background-color: color.scale($background-color, $lightness: -10%);
-    }
-
-    &:disabled {
-        background-color: color.adjust($background-color, $lightness: 20%);
-        cursor: not-allowed;
-    }
-}
-
-// Primary button mixin
-@mixin primary-button($background-color, $color) {
-    @include button($background-color, $color);
-    border: 2px solid color.scale($background-color, $lightness: -10%);
-}
-
-// Secondary button mixin
-@mixin secondary-button($background-color, $color) {
-    @include button($background-color, $color);
-    background-color: lighten($background-color, 10%);
-    border: 1px solid $grey;
-}
-
-// Call-to-action button mixin
-@mixin cta-button($background-color, $color) {
-    @include button($background-color, $color);
-    font-size: 1.25rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-// Dynamic grid layout mixin
-@mixin grid-layout($min-width: 300px, $gap: 20px) {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax($min-width, 1fr));
-    gap: $gap;
-}
-
-// Main header and navigation
+/* Header & Navigation */
 .main-header {
-    background-color: $light-bg;
-    padding: 1rem 2rem;
+    background-color: $secondary-color;
+    color: $dark-gray;
+    padding: 1.2rem 0;
 
     .main-nav {
-        @include flexbox(space-between, center);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0 auto;
+        padding: 0 2rem;
 
         &__logo {
             font-size: 1.5rem;
             font-weight: bold;
-            text-decoration: none;
-            color: inherit;
+            color: $dark-gray;
             display: flex;
             align-items: center;
+            text-decoration: none;
 
             img {
-                max-width: 50px;
-                margin-right: 10px;
-                transition: transform 0.3s ease;
-
-                &:hover {
-                    transform: scale(1.1);
-                }
-            }
-
-            &:hover {
-                color: $base-color;
+                width: 2rem;
+                margin-right: 0.8rem;
             }
         }
 
         &__items {
-            @include flexbox();
+            display: flex;
             list-style: none;
-            margin: 0;
-            padding: 0;
+        }
 
-            .main-nav__item {
-                margin-right: 2rem;
+        &__item {
+            margin-left: 1rem;
 
-                a {
-                    text-decoration: none;
+            a {
+                font-size: 1.2rem;
+                text-decoration: none;
+                color: $dark-gray;
+                padding: 0.6rem 1rem;
+                transition: color 0.3s;
+
+                &:hover {
+                    color: $primary-color;
+                }
+            }
+
+            &--cta {
+                text-decoration: none;
+                background-color: $primary-color;
+                padding: 0.6rem 1.2rem;
+                border-radius: 5px;
+                transition: background-color 0.3s;
+
+                &:hover {
+                    background-color: color.adjust($primary-color, $lightness: -10%);
+                }
+            }
+        }
+    }
+}
+
+/* Hero Section */
+#product-overview {
+    background-image: radial-gradient(circle at 50% -100%, $secondary-color 60%, $primary-color 100%);
+    text-align: center;
+    padding: 100px 20px;
+
+    h1 {
+        font-size: 3rem;
+        color: $dark-gray;
+    }
+
+    p {
+        font-size: 1.2rem;
+        color: $dark-gray;
+        margin: 20px 0;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .product-overview__item--cta {
+        background-color: $primary-color;
+        padding: 15px 30px;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+
+        &:hover {
+            background-color: color.adjust($primary-color, $lightness: -10%);
+        }
+    }
+}
+
+
+/* Plans Section */
+#plans {
+    padding: 20px;
+    background-color: #f8f6ff;
+
+    .swiper {
+        width: 100%;
+        height: 100%;
+
+        .swiper-wrapper {
+            display: flex;
+
+            .swiper-slide {
+                height: 30rem;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                padding: 20px;
+                background-color: $white;
+                border: 1px solid $white;
+                border-radius: 10px;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+                transition: transform 0.3s ease;
+
+                &:hover {
+                    transform: scale(1.05);
+                    box-shadow: 0 2px 5px $primary-color;
+                }
+
+                img {
+                    max-width: 100%;
+                    border-radius: 10px;
+                    margin-bottom: 15px;
+                }
+
+                .plan__title {
+                    font-size: 1.5em;
+                    margin: 10px 0;
                     color: $text-color;
+                }
 
-                    &:hover {
-                        color: $base-color;
-                    }
+                p {
+                    font-size: 1em;
+                    color: $dark-gray;
+                    text-align: center;
                 }
             }
         }
 
-        .main-nav__item--cta {
-            @include primary-button($base-color, $white);
+        .plan-nav {
+            width: 50%;
+            height: 12rem;
+            margin: auto;
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0px;
+
+            .swiper-button-next,
+            .swiper-button-prev {
+                color: #333;
+                /* Ensure buttons are visible */
+                width: 30px;
+                height: 30px;
+                transition: color 0.3s;
+
+                &:hover {
+                    color: $primary-color;
+                    /* Button hover effect */
+                }
+            }
+
+            .swiper-pagination {
+                text-align: center;
+                margin: 0 auto;
+
+                .swiper-pagination-bullet {
+                    background-color: $primary-color;
+                    /* Pagination bullet color */
+                }
+
+                .swiper-pagination-bullet-active {
+                    background-color: $primary-color;
+                    /* Active pagination bullet color */
+                }
+            }
         }
     }
 }
 
-// Main content
-main {
-    padding: 0 2rem;
-
-    // Product Overview Section
-    #product-overview {
-        text-align: center;
-        padding: 5rem 2rem;
-        background-image: radial-gradient($white 80%, $base-color 20%);
-
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 2.5rem;
-        }
-
-        p {
-            padding: 0 1rem;
-            font-size: 1.25rem;
-            color: $grey;
-            margin-bottom: 2.5rem;
-        }
-
-        .product-overview__item--cta {
-            @include cta-button($base-color, $white);
-        }
-    }
-}
-
-// Plans Section with Swiper integration
-#plans {
-    padding: 1rem;
-    margin: 1rem;
-    width: 100%;
-    align-items: center;
-    justify-content: center;
-    justify-items: center;
-    justify-self: center;
-}
-
-// Swiper specific styles
-.swiper {
-    width: 80%;
-}
-
-.swiper-slide {
-    background-color: #f5f5f5;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+/* Partnerships Section */
+#partnerships {
     text-align: center;
-    transition: transform 0.3s ease, opacity 0.3s ease; // Add smooth transitions
-
-    // Ensure that images inside swiper slides are responsive
-    img {
-        width: 100%;
-        border-radius: 10px 10px 0 0;
-    }
-
-    &__title {
-        font-size: 24px;
-        margin: 15px 0;
-    }
+    padding: 60px 20px;
+    background-color: $secondary-color;
 
     p {
-        font-size: 16px;
-        color: #666;
-    }
-
-    // Apply reduced opacity to non-active slides
-    &:not(.swiper-slide-active) {
-        opacity: 0.5; // Set reduced opacity for inactive slides
-        transform: scale(0.9); // Slightly reduce the size of inactive slides
-    }
-
-    // Hover effect for the active slide
-    &.swiper-slide-active:hover {
-        transform: scale(1.05); // Grow on hover for the active slide
+        font-size: 1.2rem;
+        color: $dark-gray;
+        padding: 1rem;
     }
 }
 
-// Footer Section
+/* Key Features Section */
+#key-features {
+    background-color: $white;
+    padding: 50px 0;
+    text-align: center;
+
+    .section-title {
+        width: 50%;
+        margin: auto;
+        font-size: 2rem;
+        color: $dark-gray;
+        margin-bottom: 20px;
+    }
+
+    .key-features__items {
+        display: flex;
+        justify-content: center;
+        list-style: none;
+        padding: 0;
+
+        .key-features__item {
+            margin: 0 20px;
+            padding: 4rem 2rem;
+
+            a {
+                text-decoration: none;
+                color: $dark-gray;
+            }
+        }
+    }
+}
+
+.key-feature {
+    height: 28rem;
+    display: flex;
+    flex-direction: column;
+    align-items: normal;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 20px;
+    background-color: $secondary-color;
+    border: 1px solid $white;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    text-align: start;
+
+    &:hover {
+        transform: scale(1.05);
+        box-shadow: 0 2px 5px $primary-color;
+    }
+}
+
+.parent {
+    padding: 0rem 2rem;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 1rem;
+}
+
+.div1 {
+    grid-column: span 3 / span 3;
+    grid-row: span 2 / span 2;
+}
+
+.div2 {
+    grid-column: span 3 / span 3;
+    grid-row: span 2 / span 2;
+    grid-column-start: 4;
+}
+
+.div3 {
+    grid-column: span 2 / span 2;
+    grid-row: span 2 / span 2;
+    grid-row-start: 3;
+}
+
+.div4 {
+    grid-column: span 2 / span 2;
+    grid-row: span 2 / span 2;
+    grid-column-start: 3;
+    grid-row-start: 3;
+}
+
+.div5 {
+    grid-column: span 2 / span 2;
+    grid-row: span 2 / span 2;
+    grid-column-start: 5;
+    grid-row-start: 3;
+}
+
+.section-sub-title {
+    font-size: 1.3rem;
+    margin: 10px 0;
+}
+
+/* Footer */
 .footer {
-    background-color: $dark-bg;
-    padding: 2rem 0;
+    background-color: $dark-gray;
     color: $white;
+    padding: 50px 20px;
+    text-align: center;
 
     .footer-row {
-        @include flexbox(space-between);
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
 
         .footer-col {
-            flex-basis: 22%;
+            margin-bottom: 20px;
 
             h4 {
-                font-size: 1.5rem;
-                margin-bottom: 1rem;
+                margin-bottom: 10px;
+                font-size: 1.2rem;
             }
 
             .links {
@@ -235,53 +349,80 @@ main {
                 padding: 0;
 
                 li {
-                    margin-bottom: 0.5rem;
+                    margin-bottom: 10px;
 
                     a {
-                        color: #adb5bd;
+                        color: color.adjust($white, $lightness: 20%);
                         text-decoration: none;
+                        transition: color 0.3s;
 
                         &:hover {
-                            color: $white;
+                            color: $primary-color;
                         }
                     }
                 }
             }
+        }
+    }
 
-            .icons {
-                margin-top: 1rem;
+    .icons {
+        display: flex;
+        justify-content: center;
+        margin-top: 15px;
 
-                i {
-                    margin-right: 1rem;
-                    font-size: 1.25rem;
-                    color: #adb5bd;
+        i {
+            font-size: 24px;
+            color: $white;
+            margin-right: 10px;
+            transition: color 0.3s;
 
-                    &:hover {
-                        color: $white;
-                    }
-                }
-            }
-
-            form {
-                margin-top: 1rem;
-
-                input {
-                    padding: 0.5rem;
-                    border: none;
-                    border-radius: 4px;
-                    margin-right: 0.5rem;
-                }
-
-                button {
-                    padding: 0.5rem 1rem;
-                    background-color: $base-color;
-                    color: $white;
-
-                    &:hover {
-                        background-color: color.adjust($base-color, $lightness: -10%);
-                    }
-                }
+            &:hover {
+                color: $primary-color;
             }
         }
+    }
+
+    form {
+        input[type="email"] {
+            padding: 10px;
+            border: none;
+            border-radius: 3px;
+            margin-bottom: 10px;
+            width: 80%;
+            max-width: 300px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: $primary-color;
+            color: $white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+
+            &:hover {
+                background-color: color.adjust($primary-color, $lightness: -10%);
+            }
+        }
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .main-nav {
+        flex-direction: column;
+
+        &__items {
+            flex-direction: column;
+        }
+    }
+
+    .key-features__items {
+        flex-direction: column;
+    }
+
+    .footer-row {
+        flex-direction: column;
     }
 }
