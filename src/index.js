@@ -25,6 +25,28 @@ function setupMobileNav() {
   }
 }
 
+// Accordion functionality for footer on mobile
+function setupFooterAccordion() {
+  const footerHeaders = document.querySelectorAll(".footer-col h4");
+
+  footerHeaders.forEach((header) => {
+    header.addEventListener("click", () => {
+      const parentCol = header.parentElement;
+      const isActive = parentCol.classList.contains("active");
+
+      // Close all sections
+      document
+        .querySelectorAll(".footer-col")
+        .forEach((col) => col.classList.remove("active"));
+
+      // If the clicked section wasn't already open, open it
+      if (!isActive) {
+        parentCol.classList.add("active");
+      }
+    });
+  });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   // Initialize Swiper instances with breakpoints
   function initializeSwipers() {
@@ -34,6 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
       spaceBetween: 30,
       centeredSlides: true,
       loop: true,
+      watchSlidesVisibility: true,
       grabCursor: true,
       navigation: {
         nextEl: ".swiper-button-next",
@@ -100,4 +123,5 @@ document.addEventListener("DOMContentLoaded", () => {
   setupMobileNav();
   initializeSwipers();
   setupTabs();
+  setupFooterAccordion(); // Initialize accordion functionality for footer
 });
