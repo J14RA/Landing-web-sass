@@ -9,6 +9,10 @@
 </head>
 
 <body>
+    <div class="alert">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        <strong>Danger!</strong> Indicates a dangerous or potentially negative action.
+    </div>
     <header class="main-header">
         <nav class="main-nav">
             <div class="main-nav__logo">
@@ -112,10 +116,14 @@
                         </p>
                     </div>
                 </div>
+                <div class="swiper-pagination"></div>
                 <div class="plan-nav">
-                    <div class="swiper-pagination"></div>
-                    <div class="swiper-button-next"></div>
-                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-prev">
+                        <img src="images/arrow-sm-left-svgrepo-com.svg" alt="Previous">
+                    </div>
+                    <div class="swiper-button-next">
+                        <img src="images/arrow-sm-right-svgrepo-com.svg" alt="Next">
+                    </div>
                 </div>
             </div>
         </section>

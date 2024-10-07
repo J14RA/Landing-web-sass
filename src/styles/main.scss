@@ -5,6 +5,7 @@ $text-color: #333;
 $light-gray: #f4f4f4;
 $white: #fff;
 $dark-gray: #666;
+$dark: black;
 
 /* Mixins */
 @mixin hover-bg($color) {
@@ -26,8 +27,8 @@ $dark-gray: #666;
 
 /* General Reset */
 * {
-    margin: 0;
     padding: 0;
+    margin: 0;
     box-sizing: border-box;
 }
 
@@ -38,12 +39,37 @@ body {
     background-color: $light-gray;
 }
 
+.container {
+    width: 90%;
+    height: 100%;
+}
+
+.alert {
+    padding: 20px;
+    background-color: $dark;
+    color: white;
+}
+
+.closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.closebtn:hover {
+    color: black;
+}
 
 /* Header & Navigation */
 .main-header {
     background-color: $secondary-color;
     color: $dark-gray;
-    padding: 1.2rem 0;
+    padding: 1rem 0;
 
     .main-nav {
         display: flex;
@@ -89,7 +115,8 @@ body {
             &--cta {
                 text-decoration: none;
                 @include hover-bg($primary-color);
-                background-color: $primary-color;
+                background-color: $dark;
+                color: $white;
                 padding: 0.6rem 1.2rem;
                 border-radius: 5px;
             }
@@ -164,7 +191,8 @@ body {
 
         &--cta {
             @include hover-bg($primary-color);
-            background-color: $primary-color;
+            background-color: $dark;
+            color: $white;
             padding: 0.6rem 1.2rem;
             border-radius: 5px;
         }
@@ -197,10 +225,10 @@ body {
 #product-overview {
     background-image: radial-gradient(circle at 50% -100%, $secondary-color 60%, $primary-color 100%);
     text-align: center;
-    padding: 3rem 2rem;
+    padding: 10rem;
 
     h1 {
-        font-size: 3rem;
+        font-size: 5rem;
         color: $dark-gray;
     }
 
@@ -285,40 +313,79 @@ body {
         }
 
         .plan-nav {
-            width: 50%;
-            height: 12rem;
-            margin: auto;
-            position: relative;
             display: flex;
-            justify-content: space-between;
+            width: auto; // Allow buttons to be positioned closer together
+            margin: 0 auto;
+            height: 5rem; // Adjust height as needed
+            justify-content: center; // Center both buttons horizontally
             align-items: center;
-            padding: 1rem;
+            gap: 1rem; // Reduce the gap between buttons for closer positioning
 
             .swiper-button-next,
             .swiper-button-prev {
-                color: $primary-color;
-                width: 30px;
-                height: 30px;
-                transition: color 0.3s;
+                width: 2.5rem;
+                height: 2.5rem;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 1rem;
+                background-color: transparent;
+                cursor: pointer;
+                transition: transform 0.3s;
 
                 &:hover {
-                    color: color.adjust($primary-color, $lightness: -20%);
+                    transform: scale(1.1); // Slight enlargement on hover
+                }
+
+                img {
+                    width: 1.5rem; // Size of the arrow icons
+                    height: 1.5rem;
                 }
             }
 
-            .swiper-pagination {
-                top: 1rem;
-                text-align: center;
-                margin: 0 auto;
-
-                .swiper-pagination-bullet {
-                    background-color: $primary-color;
-                }
-
-                .swiper-pagination-bullet-active {
-                    background-color: $primary-color;
-                }
+            .swiper-button-next,
+            .swiper-button-prev {
+                position: relative;
             }
+
+            .swiper-button-next:after,
+            .swiper-button-prev:after {
+                display: none; // Remove default swiper button arrows
+            }
+        }
+
+        .swiper-pagination {
+            text-align: center;
+            margin: 0 auto;
+            width: 100%;
+            height: 6rem;
+        }
+
+        .swiper-pagination-bullet {
+            width: 20px;
+            height: 4px;
+            border-radius: 0;
+            background-color: $dark-gray;
+            position: relative;
+            overflow: hidden;
+
+            &::before {
+                content: "";
+                display: block;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: $primary-color;
+                transform: scaleX(0); // Initially, no progress
+                transform-origin: left;
+                transition: transform 2s linear; // Control animation speed (matches autoplay delay)
+            }
+        }
+
+        .swiper-pagination-bullet-active::before {
+            transform: scaleX(1); // Fill the bullet progressively when active
         }
     }
 }
@@ -368,7 +435,6 @@ body {
     .key-features__items {
         margin-top: 1rem;
         list-style: none;
-        padding: 0;
         display: flex;
         justify-content: center;
 
@@ -398,7 +464,6 @@ body {
 }
 
 .key-feature__grid {
-    padding: 2rem;
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     gap: 1rem;
@@ -411,8 +476,9 @@ body {
         justify-content: space-between;
         background-color: $secondary-color;
         border-radius: 10px;
-        padding: 20px;
+        padding: 1rem;
         transition: transform 0.3s, box-shadow 0.3s;
+        gap: 1rem;
 
         &:hover {
             transform: translateY(-5px);
@@ -422,11 +488,12 @@ body {
         h3 {
             display: flex;
             align-items: center; // Vertically centers the image and text
-            justify-content: center; // Horizontally centers the content
+            justify-content: left; // Horizontally centers the content
             gap: 0.5rem; // Adds space between the image and text
-            font-size: 1.5rem;
+            font-size: 1rem;
             color: $dark-gray;
-
+            padding: 1rem;
+            border-bottom: 1px solid color.adjust($primary-color, $lightness: 5%);
 
             img {
                 background-color: $white;
@@ -507,7 +574,7 @@ body {
                     width: 100%;
                     height: 100%;
                     background-color: #fff;
-                    border: 1px solid #ddd;
+                    border: 1px solid $dark-gray;
                     border-radius: 8px;
                     padding: 1rem;
                     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -524,6 +591,8 @@ body {
                         font-weight: bold;
                         margin-bottom: 0.5rem;
                         color: #333;
+                        padding: 1rem;
+                        border-bottom: 1px solid color.adjust($primary-color, $lightness: 5%);
                     }
 
                     p {
@@ -848,6 +917,15 @@ body {
         display: none;
     }
 
+    #product-overview {
+        padding: 5rem;
+
+        h1 {
+            font-size: 3rem;
+        }
+
+    }
+
     .key-features__items {
         flex-direction: column;
         gap: 0.5rem;
@@ -911,9 +989,8 @@ body {
     }
 
     .tab {
-        align-items: normal;
-        flex-direction: column;
-        width: 100%;
+        overflow: auto;
+        white-space: nowrap;
     }
 
     .customers {

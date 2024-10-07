@@ -51,25 +51,44 @@ document.addEventListener("DOMContentLoaded", () => {
   // Initialize Swiper instances with breakpoints
   function initializeSwipers() {
     const swiper1 = new Swiper(".swiper", {
-      modules: [Navigation, Pagination],
+      modules: [Navigation, Pagination, Autoplay],
       slidesPerView: 3,
       spaceBetween: 30,
       centeredSlides: true,
       loop: true,
       watchSlidesVisibility: true,
       grabCursor: true,
-      navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
+      autoplay: {
+        delay: 2000, // Delay between slide transitions (matches the pagination animation time)
+        disableOnInteraction: false, // Keep autoplay running after interactions
       },
       pagination: {
         el: ".swiper-pagination",
-        clickable: true,
+        clickable: true, // Allow pagination bullets to be clickable
+        bulletClass: "swiper-pagination-bullet", // Custom bullet class
+        bulletActiveClass: "swiper-pagination-bullet-active", // Active bullet class
+      },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
       },
       breakpoints: {
         320: { slidesPerView: 1, spaceBetween: 10 },
         640: { slidesPerView: 2, spaceBetween: 20 },
         1024: { slidesPerView: 3, spaceBetween: 30 },
+      },
+      on: {
+        slideChangeTransitionStart: function () {
+          // Reset animations on slide change
+          const bullets = document.querySelectorAll(
+            ".swiper-pagination-bullet .swiper-pagination-bullet-active::before"
+          );
+          bullets.forEach((bullet) => {
+            bullet.style.transform = "scaleX(0)";
+            void bullet.offsetWidth; // Trigger reflow to reset animation
+            bullet.style.transform = "scaleX(1)";
+          });
+        },
       },
     });
 
