@@ -45,38 +45,50 @@ body {
 }
 
 .alert {
-    padding: 20px;
+    padding: 1rem;
     background-color: $dark;
     color: white;
+    text-align: center;
+
+    mark {
+        background-color: $primary-color;
+        border-radius: 35%;
+        padding: 0.5rem;
+    }
+
+    a {
+        color: $white;
+    }
 }
 
 .closebtn {
-    margin-left: 15px;
+    margin-left: 1rem;
     color: white;
-    font-weight: bold;
     float: right;
-    font-size: 22px;
-    line-height: 20px;
+    font-size: 1.2rem;
     cursor: pointer;
     transition: 0.3s;
-}
 
-.closebtn:hover {
-    color: black;
+    &:hover {
+        color: $primary-color;
+    }
 }
 
 /* Header & Navigation */
 .main-header {
     background-color: $secondary-color;
     color: $dark-gray;
-    padding: 1rem 0;
+    width: 100%;
+    z-index: 100;
+    position: sticky;
+    top: 0;
 
     .main-nav {
         display: flex;
         justify-content: space-between;
         align-items: center;
         margin: 0 auto;
-        padding: 0 2rem;
+        padding: 1rem 2rem;
 
         &__logo {
             font-size: 1.5rem;
@@ -129,18 +141,19 @@ body {
     color: $dark-gray;
     width: 100%;
     z-index: 100;
-    position: fixed;
+    position: sticky;
+    top: 0;
 }
 
 .mobile-nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 2rem;
+    padding: 1rem 2rem;
     position: relative;
 
     &__toggle {
-        font-size: 24px;
+        font-size: 1.5rem;
         background: none;
         border: none;
         cursor: pointer;
@@ -189,7 +202,8 @@ body {
             }
         }
 
-        &--cta {
+        .mobile-nav__item--cta {
+            text-decoration: none;
             @include hover-bg($primary-color);
             background-color: $dark;
             color: $white;
@@ -235,16 +249,14 @@ body {
     p {
         font-size: 1.2rem;
         color: $dark-gray;
-        margin: 20px 0;
-        max-width: 800px;
-        margin-left: auto;
-        margin-right: auto;
+        margin: 1.5rem auto;
+        max-width: 30rem;
     }
 
     .product-overview__item--cta {
         @include hover-bg($primary-color);
         background-color: $primary-color;
-        padding: 15px 30px;
+        padding: 1rem 2rem;
         text-decoration: none;
         border-radius: 5px;
     }
@@ -270,7 +282,7 @@ body {
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
-                padding: 20px;
+                padding: 1.2rem;
                 background-color: $white;
                 border: 1px solid $white;
                 border-radius: 10px;
@@ -280,17 +292,17 @@ body {
                 img {
                     max-width: 100%;
                     border-radius: 10px;
-                    margin-bottom: 15px;
+                    margin-bottom: 1rem;
                 }
 
                 .plan__title {
                     font-size: 1.5em;
-                    margin: 10px 0;
+                    margin: 0.8rem 0;
                     color: $text-color;
                 }
 
                 p {
-                    font-size: 1em;
+                    font-size: 1rem;
                     color: $dark-gray;
                     text-align: center;
                 }
@@ -362,9 +374,9 @@ body {
         }
 
         .swiper-pagination-bullet {
-            width: 20px;
-            height: 4px;
-            border-radius: 0;
+            width: 2rem;
+            height: 0.3rem;
+            border-radius: 10px;
             background-color: $dark-gray;
             position: relative;
             overflow: hidden;
@@ -393,7 +405,7 @@ body {
 /* Partnerships Section */
 #partnerships {
     text-align: center;
-    padding: 60px 20px;
+    padding: 1rem 2rem;
     background-color: $secondary-color;
 
     p {
@@ -410,7 +422,8 @@ body {
     text-align: center;
 
     .key-features__title {
-        margin-bottom: 2rem;
+        max-width: 40rem;
+        margin: 0 auto;
 
         h2 {
             font-size: 2.5rem;
@@ -440,7 +453,7 @@ body {
 
         .key-features__item {
             align-items: center;
-            padding: 1rem;
+            padding: 3rem;
             display: flex;
             justify-content: normal;
             gap: 1rem;
@@ -476,7 +489,7 @@ body {
         justify-content: space-between;
         background-color: $secondary-color;
         border-radius: 10px;
-        padding: 1rem;
+        padding: 2rem;
         transition: transform 0.3s, box-shadow 0.3s;
         gap: 1rem;
 
@@ -492,7 +505,7 @@ body {
             gap: 0.5rem; // Adds space between the image and text
             font-size: 1rem;
             color: $dark-gray;
-            padding: 1rem;
+            padding: 1rem 0;
             border-bottom: 1px solid color.adjust($primary-color, $lightness: 5%);
 
             img {
@@ -506,7 +519,7 @@ body {
         p {
             font-size: 1rem;
             color: $dark-gray;
-            text-align: center; // Centers the paragraph text as well
+            text-align: left;
         }
 
         figure {
@@ -529,8 +542,6 @@ body {
     .div5 {
         grid-column: span 2;
     }
-
-
 }
 
 #documentation {
@@ -539,7 +550,7 @@ body {
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        padding: 2rem;
+        padding: 1rem 2rem;
         background-color: $secondary-color;
         border-radius: 8px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -548,7 +559,8 @@ body {
             text-align: center;
             font-size: 2rem;
             font-weight: bold;
-            margin: 1rem 7rem;
+            max-width: 35rem;
+            margin: 1rem auto;
             color: #333;
         }
 
@@ -556,6 +568,7 @@ body {
             text-align: center;
             font-size: 1rem;
             color: #666;
+            max-width: 30rem;
             margin-bottom: 2rem;
         }
 
@@ -596,6 +609,7 @@ body {
                     }
 
                     p {
+                        text-align: left;
                         font-size: 1rem;
                         color: #666;
                     }
@@ -625,14 +639,15 @@ body {
 
 #customers {
     text-align: center;
-    padding: 60px 20px;
+    padding: 1rem 2rem;
     background-color: $white;
 
     .section-title {
         text-align: center;
         font-size: 2rem;
         font-weight: bold;
-        margin: 1rem 7rem;
+        max-width: 30rem;
+        margin: 1rem auto;
         color: #333;
     }
 
@@ -672,8 +687,7 @@ body {
 
 .tabcontent {
     display: block;
-    padding: 20px;
-
+    padding: 1rem 2rem;
 
     &.active {
         display: block;
@@ -684,11 +698,10 @@ body {
     display: grid;
     grid-template-columns: 1fr 1fr; // Two equal columns for larger screens
     background-color: $secondary-color;
-    border-radius: 10px;
+    border-radius: 20px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 0; // Added padding for consistent spacing
+    margin: 1rem auto;
+    padding: unset; // Added padding for consistent spacing
 
     // Left side: Video section
     .testimonial-video {
@@ -705,7 +718,7 @@ body {
     // Right side: Testimonial section
     .testimonial {
         grid-column: 2;
-        padding: 0;
+        margin: 1rem;
         text-align: center;
         display: flex;
         flex-direction: column;
@@ -718,14 +731,14 @@ body {
             flex-direction: row;
 
             .company-logo {
-                font-size: 1.5rem;
+                font-size: 3rem;
                 font-weight: bold;
                 color: $dark-gray;
                 display: flex;
                 align-items: center;
 
                 img {
-                    width: 2rem;
+                    width: 5rem;
                     height: auto;
                 }
             }
@@ -744,9 +757,8 @@ body {
         }
 
         .quote {
-            font-size: 0.8rem;
+            font-size: 1.2rem;
             font-style: italic;
-            margin-bottom: 10px;
         }
 
         .person {
@@ -757,12 +769,12 @@ body {
 
             .author {
                 font-weight: bold;
-                font-size: 0.7rem;
+                font-size: 1.2rem;
             }
 
             .title {
                 color: $dark-gray;
-                font-size: 0.7rem;
+                font-size: 1.2rem;
             }
         }
     }
@@ -776,25 +788,24 @@ body {
     background-repeat: no-repeat, repeat;
     background-position: center, 0 0;
     text-align: center;
-    padding: 5rem 10rem;
 
     h2 {
+        max-width: 30rem;
+        margin: 1rem auto;
         font-size: 2rem;
         color: $white;
     }
 
     p {
-        font-size: 0.8rem;
+        font-size: 1rem;
         color: $dark-gray;
-        margin: 20px 0;
-        max-width: 800px;
-        margin-left: auto;
-        margin-right: auto;
+        max-width: 25rem;
+        margin: 1rem auto;
     }
 
     .bottom-ads--cta {
         background-color: $secondary-color;
-        padding: 15px 30px;
+        padding: 1rem 2rem;
         color: #000;
         text-decoration: none;
         border-radius: 5px;
@@ -810,7 +821,7 @@ body {
 .footer {
     background-color: $dark-gray;
     color: $white;
-    padding: 1rem;
+    padding: 1rem 2rem;
     text-align: center;
 
     &__logo {
@@ -830,7 +841,7 @@ body {
     .footer-row {
         text-align: left;
         display: flex;
-        justify-content: space-around;
+        justify-content: space-between;
         flex-wrap: wrap;
 
         .footer-col {
@@ -861,7 +872,7 @@ body {
     }
 
     .footer-bottom {
-        padding: 20px 0;
+        width: 100%;
         border-top: 1px solid color.adjust($white, $lightness: -40%);
         margin-top: 20px;
         display: flex;
@@ -897,7 +908,29 @@ body {
     }
 }
 
-@media screen and (max-width: 768px) {
+/* Breakpoint Mixins */
+@mixin mobile {
+    @media screen and (max-width: 768px) {
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media screen and (min-width: 769px) and (max-width: 1024px) {
+        @content;
+    }
+}
+
+@mixin desktop {
+    @media screen and (min-width: 1025px) {
+        @content;
+    }
+}
+
+/* Mobile Styles */
+@include mobile {
+
+    /* Footer adjustments */
     .footer-row {
         flex-direction: column;
     }
@@ -909,73 +942,94 @@ body {
     .footer-col.active .links {
         display: block; // Show links when the section is active
     }
-}
 
-/* Responsive improvements for the grid and main navigation */
-@media (max-width: 768px) {
-    .main-header {
-        display: none;
-    }
-
-    #product-overview {
-        padding: 5rem;
-
-        h1 {
-            font-size: 3rem;
-        }
-
-    }
-
-    .key-features__items {
-        flex-direction: column;
-        gap: 0.5rem;
-    }
-
-    .key-feature__grid {
-        display: flex;
-        flex-direction: column;
-        gap: 2rem;
-        padding: unset;
-
-        .div1,
-        .div2,
-        .div3,
-        .div4,
-        .div5 {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-
-            .key-feature__detail {
-                max-width: 500px;
-                /* Set max-width for consistency */
-                width: 100%;
-            }
-        }
-    }
-
-    #documentation {
-        .documentation {
-            .section-title {
-                margin: 1rem 0;
-            }
-
-            .documentation__items {
-                flex-direction: column;
-                align-items: center;
-
-                .documentation__item {
-                    flex: 1 1 100%;
-                    max-width: 100%;
-
-                    .documentation-card {
-                        width: 100%;
+    .footer {
+        .footer-bottom {
+            .footer-bottom_icon {
+                li {
+                    a {
+                        img {
+                            width: 1.2rem;
+                        }
                     }
                 }
             }
         }
     }
 
+    /* Hide the desktop header */
+    .main-header {
+        display: none;
+    }
+
+    /* Product overview section */
+    #product-overview {
+        padding: 2.5rem;
+
+        h1 {
+            font-size: 3rem;
+        }
+    }
+
+    #key-features {
+
+        /* Key features section */
+        .key-features__items {
+            flex-direction: column;
+            gap: 0.5rem;
+
+            .key-features__item {
+                padding: 1rem;
+
+            }
+        }
+
+        .key-feature__grid {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            padding: 0;
+
+            .div1,
+            .div2,
+            .div3,
+            .div4,
+            .div5 {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+
+                .key-feature__detail {
+                    max-width: 500px;
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+    /* Documentation section */
+    #documentation .documentation {
+        .section-title {
+            margin: 1rem 0;
+        }
+
+        .documentation__items {
+            flex-direction: column;
+            align-items: center;
+
+            .documentation__item {
+                flex: 1 1 100%;
+                width: 100%;
+                max-width: 100%;
+
+                .documentation-card {
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+    /* Customers section */
     #customers {
         padding: 1rem;
 
@@ -996,39 +1050,155 @@ body {
     .customers {
         display: flex;
         flex-direction: column;
+
+        .testimonial {
+
+            .logo-stars-container {
+
+                .company-logo {
+                    font-size: 1.2rem;
+
+                    img {
+                        width: 3rem;
+                        height: auto;
+                    }
+                }
+            }
+
+            .quote {
+                font-size: 1rem;
+            }
+
+            .person {
+                flex-direction: column; // Stack the author and title for better alignment
+                align-items: center;
+                justify-content: space-around;
+
+                .author {
+                    font-weight: bold;
+                    font-size: 1rem;
+                }
+
+                .title {
+                    color: $dark-gray;
+                    font-size: 1rem;
+                }
+            }
+        }
     }
 
+
+    /* Bottom ads section */
     #bottom-ads {
         padding: 2rem;
     }
-
-    // .footer-row {
-    //     text-align: left;
-    //     align-items: baseline;
-    //     flex-direction: column;
-    // }
 }
 
-@media (min-width: 768px) {
+/* Tablet Styles */
+@include tablet {
+
+    /* Footer adjustments */
+    .footer-row {
+        flex-direction: row;
+    }
+
+    .footer-col {
+        flex: 1;
+    }
+
+    /* Show the main header and hide the mobile header */
+    .main-header {
+        display: block;
+    }
+
     .mobile-header {
-        display: none
+        display: none;
+    }
+
+    /* Adjust padding for product overview */
+    #product-overview {
+        padding: 8rem 2rem;
+
+        h1 {
+            font-size: 4rem;
+        }
+
+        p {
+            font-size: 1.1rem;
+        }
+    }
+
+    /* Key features section */
+
+    /* Documentation section */
+    .documentation__items {
+        flex-direction: row;
+        justify-content: space-between;
+
+        .documentation__item {
+            flex: 1 1 45%;
+            margin: 1rem 0;
+        }
+    }
+
+    /* Customers section */
+    .customers {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    /* Bottom ads */
+    #bottom-ads {
+        padding: 3rem;
     }
 }
 
-// //  @media screen and (max-width: 768px) {
-// // .footer-row {
-//         text-align: left;
-//         align-items: baseline;
-//         flex-direction: column;
-//     }
-// //  }
+/* Desktop Styles */
+@include desktop {
 
-// @media screen and (max-width: 768px) {
+    /* Footer layout */
+    .footer-row {
+        flex-direction: row;
+    }
 
-// }
+    .footer-col {
+        flex: 1;
+    }
 
-// @media screen and (max-width: 480px) {
-//     .key-feature__detail {
-//         padding: 15px;
-//     }
-// }
+    /* Show the main header and hide the mobile header */
+    .main-header {
+        display: block;
+    }
+
+    .mobile-header {
+        display: none;
+    }
+
+    /* Adjust padding for product overview */
+    #product-overview {
+        padding: 10rem 5rem;
+
+        h1 {
+            font-size: 5rem;
+        }
+
+        p {
+            font-size: 1.2rem;
+        }
+    }
+
+    /* Key features section */
+
+    /* Documentation section */
+
+    /* Customers section */
+    .customers {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    /* Bottom ads */
+    #bottom-ads {
+        padding: 4rem;
+    }
+}
